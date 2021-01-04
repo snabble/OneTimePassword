@@ -15,13 +15,30 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/norio-nomura/Base32", from: "0.9.0")
+        .package(name: "Base32" ,url: "https://github.com/norio-nomura/Base32", from: "0.9.0")
     ],
     targets: [
         .target(
             name: "OneTimePassword",
             dependencies: ["Base32"],
             path: "Sources",
+            exclude: [
+                "Info.plist"
+            ]
+        ),
+        .testTarget(
+            name: "OnetimePasswordTests",
+            dependencies: ["OneTimePassword"],
+            path: "Tests",
+            exclude: [
+                "App",
+                "Info.plist"
+            ]
+        ),
+        .testTarget(
+            name: "OneTimePasswordLegacyTests",
+            dependencies: ["OneTimePassword"],
+            path: "OneTimePasswordLegacyTests",
             exclude: [
                 "Info.plist"
             ]
